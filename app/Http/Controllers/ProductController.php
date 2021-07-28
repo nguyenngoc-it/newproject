@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use MongoDB\Driver\Session;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,10 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return view('backend.products.list ', compact('products'));
+    }
+    public function showproduct(){
+        $products = Product::all();
+        return view('fontend.index',compact('products'));
     }
 
     /**
@@ -120,5 +125,42 @@ class ProductController extends Controller
         toastr()->success('xóa thành công', 'delete');
 //        toastr()->success('Đã xóa thành công','Delete');
         return redirect()->route('product.index');
+    }
+
+    public function showCart(){
+
+        $cart= session()->get('cart');
+//        dd($cart);
+        return view('fontend.product.cart', compact('cart'));
+    }
+
+    public function addToCart($id)
+    {
+
+        $carts= session()->get('cart');
+        $product= Product::findOrFail($id);
+        if (!$carts){
+            $carts= [
+                $id=>[
+                    'name'=>$product->name,
+                    'price'=>$product->price,
+                    'quatity'=>1,
+                    'image'=>$product->image
+                ]
+            ];
+        }
+        if (isset($carts[$id])){
+            $carts[$id]['quatity'] ++;
+            session()->put('cart', $carts);
+            return redirect()->back();
+        }
+        $carts[$id]=[
+            'name'=>$product->name,
+            'price'=>$product->price,
+            'quatity'=>1,
+            'image'=>$product->image
+        ];
+
+
     }
 }

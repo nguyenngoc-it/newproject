@@ -32,7 +32,7 @@
                                         @foreach($products as $product)
                                             <tr>
                                                 <td>{{$product->id}}</td>
-                                                <td><img src="{{asset('storage/'.$product->image)}}" alt=""></td>
+                                                <td><img src="{{asset('storage/'.$product->image)}}" alt="" style="width: 100px "></td>
                                                 <td>{{$product->name}}</td>
                                                 <td>{{$product->price}}</td>
                                                 @if(isset($product->category))

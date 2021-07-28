@@ -41,3 +41,14 @@ Route::prefix('register')->group(function ()
     Route::get('/',[UserController::class,'create'])->name('register.create');
     Route::post('create',[UserController::class,'store'])->name('register.store');
 });
+
+Route::get('/index',[ProductController::class,'showproduct'])->name('showproduct');
+Route::get('/detail', function ()
+{
+    return view('fontend.product.productdetail');
+});
+Route::prefix('cart')->group(function ()
+{
+    Route::get('/',[ProductController::class,'showCart'])->name('cart.showcart');
+    Route::get('/addtocart/{id}', [ProductController::class, 'addToCart'])->name('cart.addtocart');
+});
