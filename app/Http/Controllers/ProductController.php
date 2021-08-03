@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use MongoDB\Driver\Session;
+use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
 {
@@ -15,24 +18,30 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-//    public function showProduct()
-//    {
-//        $products= Product::where('category_id',2)->get();
-//        $products= Product::find(1);
-//        foreach ($products->bills as $bill){
-//                echo $bill->pivot->id;
-//        }
-//        return view('backend.products.list ', compact('products'));
-//    }
 
     public function index()
     {
-        $products = Product::all();
-        return view('backend.products.list ', compact('products'));
+        $user= Auth::user();
+        if (Gate::allows('show-dashboard', $user)){
+            if (Auth::check()){
+                $products = Product::all();
+                return view('backend.products.list ', compact('products'));
+            }
+            else{
+                toastError('Bạn cần đăng nhập vào trang admin', 'hong bao');
+                return  redirect()->route('login');
+            }
+        }else{
+            abort(403);
+        }
+
+
     }
-    public function showproduct(){
+
+    public function getProduct()
+    {
         $products = Product::all();
-        return view('fontend.index',compact('products'));
+        return view('fontend.index', compact('products'));
     }
 
     /**
@@ -57,10 +66,10 @@ class ProductController extends Controller
 
 //        dd($request->file());
 
-        $path= $request->file('fileToUpload')->store('images','public');
+        $path = $request->file('fileToUpload')->store('images', 'public');
 
         $product = new Product();
-        $product->image= $path;
+        $product->image = $path;
         $product->name = $request->name_product;
         $product->price = $request->price_product;
         $product->category_id = $request->id_category;
@@ -105,7 +114,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->name = $request->name_product;
         $product->price = $request->price_product;
-        $product->id_category = $request->id_category;
+        $product->category_id = $request->id_category;
         $product->describes = $request->describes;
         $product->status = $request->status;
         $product->save();
@@ -127,40 +136,46 @@ class ProductController extends Controller
         return redirect()->route('product.index');
     }
 
-    public function showCart(){
+    public function showCart()
+    {
 
-        $cart= session()->get('cart');
+        $cart = session()->get('cart');
 //        dd($cart);
-        return view('fontend.product.cart', compact('cart'));
+        return view('fontend.product.cart',compact('cart'));
     }
+
 
     public function addToCart($id)
     {
 
-        $carts= session()->get('cart');
-        $product= Product::findOrFail($id);
-        if (!$carts){
-            $carts= [
-                $id=>[
-                    'name'=>$product->name,
-                    'price'=>$product->price,
-                    'quatity'=>1,
-                    'image'=>$product->image
-                ]
+        $product = Product::findOrFail($id);
+        $cart = session()->get('cart');
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] += 1;
+        } else {
+            $cart[$id] = [
+                'name' => $product->name,
+                'price' => $product->price,
+                'image' => $product->image,
+                'quantity' => 1
             ];
         }
-        if (isset($carts[$id])){
-            $carts[$id]['quatity'] ++;
+        session()->put('cart', $cart);
+        toastr()->success('thêm thành công', 'Thông báo');
+        return response()->json($cart);
+
+    }
+
+    public function updateCart(Request $request)
+    {
+        if ($request->id && $request->quantity){
+            $carts= session()->get('cart');
+            $carts[$request->id]['quantity']= $request->quantity;
             session()->put('cart', $carts);
-            return redirect()->back();
+            $carts= session()->get('cart');
+            $cartCompoment= view('fontend.product.compoments.cart_compoment', compact('carts'))->render();
+
+            return response()->json(['cart_compoment'=> $cartCompoment, 'code'=>200], 200);
         }
-        $carts[$id]=[
-            'name'=>$product->name,
-            'price'=>$product->price,
-            'quatity'=>1,
-            'image'=>$product->image
-        ];
-
-
     }
 }

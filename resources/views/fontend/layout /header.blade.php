@@ -49,12 +49,12 @@
                             <i class="lni lni-user"></i>
                             Hello
                         </div>
-                        <ul class="user-login">
+                        <ul class="user-login" id="userLogIn">
                             <li>
-                                <a href="login.html">Sign In</a>
+                                <a href="{{route('login')}}">Sign In</a>
                             </li>
                             <li>
-                                <a href="register.html">Register</a>
+                                <a href="{{route('register.create')}}">Register</a>
                             </li>
                         </ul>
                     </div>
@@ -118,9 +118,9 @@
                                 </a>
                             </div>
                             <div class="cart-items">
-                                <a href="{{route('cart.showcart')}}"  class="main-btn">
+                                <a href="{{route('cart.showCart')}}"  class="main-btn">
                                     <i class="lni lni-cart"></i>
-                                    <span class="total-items">{{count((array)session('cart'))}}</span>
+                                    <span class="total-items" id="shoppingCart">{{count((array)session('cart'))}}</span>
                                 </a>
                                 <!-- Shopping Item -->
 

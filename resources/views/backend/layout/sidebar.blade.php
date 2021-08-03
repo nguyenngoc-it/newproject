@@ -5,7 +5,7 @@
       Tip 2: you can also add an image using data-image tag
   -->
     <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Creative Tim
+        {{\Illuminate\Support\Facades\Auth::user()->name}}
         </a></div>
     <div class="sidebar-wrapper">
         <ul class="nav">
@@ -49,6 +49,12 @@
                 <a class="nav-link" href="./notifications.html">
                     <i class="material-icons">notifications</i>
                     <p>Notifications</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{{route('logOut')}}">
+                    <i class="material-icons">notifications</i>
+                    <p>LogOut</p>
                 </a>
             </li>
             <!-- <li class="nav-item active-pro ">

@@ -1,6 +1,7 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="{{asset('assetsregister/css/bootstrap.min.css')}}" rel="stylesheet" id="bootstrap-css">
+<script src="{{asset('assetsregister/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('assetsregister/js/jquery.min.js')}}"></script>
+<script src="{{asset('assetsregister/js/my.js')}}"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
 <link rel="stylesheet" href="{{asset('assets1/css/register/style.css')}}">
@@ -31,7 +32,7 @@
                 <p class="text-danger">{{$message}}</p>
                 @enderror
                 <div class="form-group input-group">
-                    <div class="input-group-prepend">
+                    <div class="input-group-prepend" >
                         <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                     </div>
                     <input  name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" placeholder="Email" type="email">
@@ -41,19 +42,19 @@
                 @enderror
 
                 <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-eye-slash"></i> </span>
+                    <div class="input-group-prepend" id="eye">
+                        <span class="input-group-text"> <i class="fas fa-eye-slash" id="icon-eye"></i> </span>
                     </div>
-                    <input name="password" value="{{old('password')}}" class="form-control @error('password') is-invalid @enderror" placeholder="Create password" type="password">
+                    <input id="inputpassword" name="password" value="{{old('password')}}" class="form-control @error('password') is-invalid @enderror" placeholder="Create password" type="password">
                 </div> <!-- form-group// -->
                 @error('password')
                 <p class="text-danger">{{$message}}</p>
                 @enderror
                 <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fas fa-eye"></i> </span>
+                    <div class="input-group-prepend" id="hiden-eye">
+                        <span class="input-group-text"> <i class="fas fa-eye-slash" id="hiden-icon-eye"></i> </span>
                     </div>
-                    <input name="repeat-password" value="{{old('password')}}" class="form-control @error('repeat-password') is-invalid @enderror" placeholder="Repeat password" type="password">
+                    <input id="repeatpassword" name="repeat-password" value="{{old('password')}}" class="form-control @error('repeat-password') is-invalid @enderror" placeholder="Repeat password" type="password">
                 </div> <!-- form-group// -->
                 @error('repeat-password')
                 <p class="text-danger">{{$message}}</p>
@@ -61,7 +62,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
                 </div> <!-- form-group// -->
-                <p class="text-center">Have an account? <a href="">Log In</a> </p>
+                <p class="text-center">Have an account? <a href="{{route('showFormLogin')}}">Log In</a> </p>
             </form>
         </article>
     </div> <!-- card.// -->
@@ -69,5 +70,5 @@
 </div>
 <!--container end.//-->
 
-<br><br>
+
 

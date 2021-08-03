@@ -11,22 +11,6 @@
                         <div class="hero-slider">
                             <!-- Start Single Slider -->
                             <div class="single-slider"
-                                 style="background-image: url({{asset('assets/images/hero/slider-bg1.jpg')}});">
-                                <div class="content">
-                                    <h2><span>No restocking fee ($35 savings)</span>
-                                        M75 Sport Watch
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Now Only</span> $320.99</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End Single Slider -->
-                            <!-- Start Single Slider -->
-                            <div class="single-slider"
                                  style="background-image: url({{asset('assets/images/hero/slider-bg2.jpg')}});">
                                 <div class="content">
                                     <h2><span>Big Sale Offer</span>
@@ -95,39 +79,40 @@
                 </div>
             </div>
 
-            <div class="row">
-                @foreach($products as $product )
-                    <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="product-image">
-                                <img src="{{asset('storage/'.$product->image)}}" alt="#">
-                                <div class="button">
-                                    <a href="{{route('cart.addtocart',$product->id)}}" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
-                                </div>
-                            </div>
-                            <div class="product-info">
-                                <span class="category">Watches</span>
-                                <h4 class="title">
-                                    <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                                </h4>
-                                <ul class="review">
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star-filled"></i></li>
-                                    <li><i class="lni lni-star"></i></li>
-                                    <li><span>4.0 Review(s)</span></li>
-                                </ul>
-                                <div class="price">
-                                    <span>$199.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Product -->
-                    </div>
+            <div class="row" id="product">
+{{--                @foreach($products as $product )--}}
+{{--                    <div class="col-lg-3 col-md-6 col-12">--}}
+{{--                        <!-- Start Single Product -->--}}
+{{--                        <div class="single-product">--}}
+{{--                            <div class="product-image" style="height: 250px">--}}
+{{--                                <img src="{{asset('storage/'.$product->image)}}" alt="#" style="height: 100%">--}}
+{{--                                <a href="" class="btn">--}}
+{{--                                    <a href="{{route('cart.addtocart',$product->id)}}" class="btn abc">--}}
+{{--                                        <i class="lni lni-cart"></i> Add to Cart</a>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                            <div class="product-info">--}}
+{{--                                <span class="category">Watches</span>--}}
+{{--                                <h4 class="title">--}}
+{{--                                    <a href="product-grids.html">Xiaomi Mi Band 5</a>--}}
+{{--                                </h4>--}}
+{{--                                <ul class="review">--}}
+{{--                                    <li><i class="lni lni-star-filled"></i></li>--}}
+{{--                                    <li><i class="lni lni-star-filled"></i></li>--}}
+{{--                                    <li><i class="lni lni-star-filled"></i></li>--}}
+{{--                                    <li><i class="lni lni-star-filled"></i></li>--}}
+{{--                                    <li><i class="lni lni-star"></i></li>--}}
+{{--                                    <li><span>4.0 Review(s)</span></li>--}}
+{{--                                </ul>--}}
+{{--                                <div class="price">--}}
+{{--                                    <span>$199.00</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <!-- End Single Product -->--}}
+{{--                    </div>--}}
 
-                @endforeach
+{{--                @endforeach--}}
             </div>
 
         </div>

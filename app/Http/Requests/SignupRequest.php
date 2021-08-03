@@ -24,9 +24,9 @@ class SignupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'bail|required|min:6|max:10',
+            'name'=>'bail|required|min:3|max:15',
             'email'=>'bail|required|email',
-            'password'=>'bail|required|min:6',
+            'password'=>'bail|required|min:3',
             'repeat-password'=>'bail|required',
         ];
     }

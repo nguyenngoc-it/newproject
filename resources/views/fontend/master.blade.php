@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('assets/css/glightbox.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/main.css')}}" />
 </head>
-
+@toastr_css
 <body>
 <!--[if lte IE 9]>
 <p class="browserupgrade">
@@ -56,11 +56,16 @@
 </a>
 
 <!-- ========================= JS here ========================= -->
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/tiny-slider.js"></script>
+{{--<script src="assets/js/bootstrap.min.js"></script>--}}{{--  <base href="{{asset('')}}">--}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+<script src="{{asset('assets/js/my.js')}}"></script>
+<script src="{{asset('assets/js/cart.js')}}"></script>
+<script src="{{asset('assets/js/tiny-slider.js')}}"></script>
 <script src="assets/js/glightbox.min.js"></script>
 <script src="assets/js/main.js"></script>
 <script type="text/javascript">
+
     //========= Hero Slider
     tns({
         container: '.hero-slider',
@@ -101,5 +106,7 @@
     });
 </script>
 </body>
-
+@jquery
+@toastr_js
+@toastr_render
 </html>

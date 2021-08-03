@@ -35,7 +35,7 @@
                 <label for="avt" class="form-label">Image</label>
                 <input type="file" class="form-control" id="avt" name="fileToUpload">
             </div>
-            <button type="submit" class="btn btn-primary">Create product</button>
+            <button type="submit" class="btn btn-primary">Update product</button>
         </form>
     </div>
 
